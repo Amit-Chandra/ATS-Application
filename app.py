@@ -15,9 +15,9 @@ def index():
             return "All fields are required!", 400
         
         resume_text = extract_text_from_pdf(file)
-        score = score_resume(resume_text, required_skills)
+        analysis = score_resume(resume_text, required_skills)
 
-        return render_template("result.html", filename=file.filename, score=score, job_title=job_title)
+        return render_template("result.html", filename=file.filename, job_title=job_title, analysis=analysis)
 
     return render_template("index.html")
 

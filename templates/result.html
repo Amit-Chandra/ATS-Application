@@ -7,7 +7,26 @@
 <body>
     <h2>Resume Analysis for {{ job_title }}</h2>
     <p>File: {{ filename }}</p>
-    <p>Match Score: {{ score }}</p>
+    <p><strong>Match Score:</strong> {{ analysis.score }}%</p>
+
+    <h3>Analysis:</h3>
+    <p><strong>Strongest Section:</strong> {{ analysis.strongest_section }}</p>
+    <p><strong>Weakest Section:</strong> {{ analysis.weakest_section }}</p>
+
+    <h3>Matched Skills:</h3>
+    <ul>
+        {% for skill in analysis.matched_skills %}
+            <li>{{ skill }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Skills to Improve:</h3>
+    <ul>
+        {% for skill in analysis.missing_skills %}
+            <li>{{ skill }}</li>
+        {% endfor %}
+    </ul>
+
     <a href="/">Analyze Another Resume</a>
 </body>
 </html>
