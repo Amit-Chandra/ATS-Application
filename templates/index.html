@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ATS - Resume Scoring</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h2>Upload Resume for Job Application</h2>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <label>Job Title:</label>
+        <input type="text" name="job_title" required>
+
+        <label>Required Skills (comma-separated):</label>
+        <input type="text" name="required_skills" required>
+
+        <label>Upload Resume (PDF):</label>
+        <input type="file" name="resume" accept=".pdf" required>
+
+        <button type="submit">Analyze Resume</button>
+    </form>
+</body>
+</html>
