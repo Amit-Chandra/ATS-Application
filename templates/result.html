@@ -3,30 +3,53 @@
 <head>
     <title>Resume Analysis Result</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-    <h2>Resume Analysis for {{ job_title }}</h2>
-    <p>File: {{ filename }}</p>
-    <p><strong>Match Score:</strong> {{ analysis.score }}%</p>
+    <div class="header-box">
+        <h1>ATS-Application - Resume Analysis</h1>
+    </div>
 
-    <h3>Analysis:</h3>
-    <p><strong>Strongest Section:</strong> {{ analysis.strongest_section }}</p>
-    <p><strong>Weakest Section:</strong> {{ analysis.weakest_section }}</p>
+    <div class="container">
+        <h2>Analysis for {{ job_title }}</h2>
+        <p><strong>File:</strong> {{ filename }}</p>
+        <div class="score-box">
+            <h3>Resume Score: <span class="score">{{ analysis.score }}%</span></h3>
+        </div>
 
-    <h3>Matched Skills:</h3>
-    <ul>
-        {% for skill in analysis.matched_skills %}
-            <li>{{ skill }}</li>
-        {% endfor %}
-    </ul>
+        <div class="chart-container">
+            <h3>Skills Match Visualization</h3>
+            <div id="skillChart"></div>
+        </div>
 
-    <h3>Skills to Improve:</h3>
-    <ul>
-        {% for skill in analysis.missing_skills %}
-            <li>{{ skill }}</li>
-        {% endfor %}
-    </ul>
+        <div class="analysis-box">
+            <h3>Analysis</h3>
+            <p><strong>Strongest Section:</strong> {{ analysis.strongest_section }}</p>
+            <p><strong>Weakest Section:</strong> {{ analysis.weakest_section }}</p>
+        </div>
 
-    <a href="/">Analyze Another Resume</a>
+        <div class="skills-box">
+            <h3>Matched Skills</h3>
+            <ul>
+                {% for skill in analysis.matched_skills %}
+                    <li>{{ skill }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="skills-box">
+            <h3>Skills to Improve</h3>
+            <ul>
+                {% for skill in analysis.missing_skills %}
+                    <li>{{ skill }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <a href="/" class="btn">Analyze Another Resume</a>
+    </div>
+
+    <script type="application/json" id="chartData">{{ pie_chart_json | safe }}</script>
+    <script src="{{ url_for('static', filename='charts.js') }}"></script>
 </body>
 </html>
